@@ -3,162 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usługi Tymczasowo Zawieszone</title>
+    <title>Moje Usługi</title>
     <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #9b59b6;
+            --light: #ecf0f1;
+            --dark: #34495e;
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: var(--light);
             min-height: 100vh;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
+            align-items: center;
             padding: 20px;
         }
-
-        .maintenance-container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 50px 40px;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
+        
+        .container {
+            max-width: 800px;
             width: 100%;
-            backdrop-filter: blur(10px);
+            text-align: center;
         }
-
-        .icon {
-            font-size: 80px;
-            margin-bottom: 30px;
-            color: #667eea;
+        
+        header {
+            margin-bottom: 40px;
         }
-
+        
         h1 {
-            color: #333;
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            font-weight: 700;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 300;
         }
-
+        
         .subtitle {
-            color: #666;
-            font-size: 1.3em;
-            margin-bottom: 30px;
-            line-height: 1.6;
+            font-size: 1.1rem;
+            opacity: 0.8;
         }
-
-        .message {
-            background: #f8f9fa;
-            border-left: 4px solid #667eea;
-            padding: 25px;
-            margin: 30px 0;
-            text-align: left;
-            border-radius: 0 10px 10px 0;
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
         }
-
-        .message p {
-            color: #555;
-            line-height: 1.6;
+        
+        .service-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 30px 20px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .service-title {
+            font-size: 1.5rem;
             margin-bottom: 10px;
         }
-
-        .message p:last-child {
-            margin-bottom: 0;
+        
+        .service-description {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 20px;
+            min-height: 40px;
         }
-
-        .contact-info {
-            background: #e3f2fd;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 25px 0;
-        }
-
-        .status {
+        
+        .btn {
             display: inline-block;
-            background: #ff9800;
+            padding: 10px 25px;
+            background: var(--secondary);
             color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-weight: 600;
-            margin: 15px 0;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
         }
-
-        .progress-bar {
-            width: 100%;
-            height: 6px;
-            background: #e0e0e0;
-            border-radius: 3px;
-            margin: 25px 0;
-            overflow: hidden;
+        
+        .btn:hover {
+            background: #2980b9;
+            transform: scale(1.05);
         }
-
-        .progress {
-            width: 95%;
-            height: 100%;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            border-radius: 3px;
-            animation: pulse 2s ease-in-out infinite alternate;
+        
+        .jellyfin .btn {
+            background: #00A4DC;
         }
-
-        @keyframes pulse {
-            0% { opacity: 0.7; }
-            100% { opacity: 1; }
+        
+        .jellyfin .btn:hover {
+            background: #0088b3;
         }
-
-        .footer {
-            margin-top: 30px;
-            color: #888;
-            font-size: 0.9em;
+        
+        footer {
+            margin-top: 50px;
+            font-size: 0.9rem;
+            opacity: 0.7;
         }
-
-        @media (max-width: 768px) {
-            .maintenance-container {
-                padding: 30px 20px;
-            }
-            
+        
+        @media (max-width: 600px) {
             h1 {
-                font-size: 2em;
+                font-size: 2rem;
             }
             
-            .icon {
-                font-size: 60px;
+            .services-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="maintenance-container">
-        <div class="icon">🔧</div>
+    <div class="container">
+        <header>
+            <h1>Moje Usługi</h1>
+            <p class="subtitle">Wybierz usługę, do której chcesz przejść</p>
+        </header>
         
-        <h1>Usługi Tymczasowo Zawieszone</h1>
-        
-        <div class="subtitle">
-            Przeprowadzamy niezbędne prace konserwacyjne
-        </div>
+        <div class="services-grid">
+            <div class="service-card jellyfin">
+                <div class="service-icon">🎬</div>
+                <h3 class="service-title">Jellyfin</h3>
+                <p class="service-description">Platforma multimedialna do przeglądania filmów i seriali</p>
+                <a href="https://jellyfin.vaxyn.website" class="btn">Otwórz Jellyfin</a>
+            </div>
 
-        <div class="status">PRZERWA TECHNICZNA</div>
-
-        <div class="progress-bar">
-            <div class="progress"></div>
-        </div>
-
-        <div class="message">
-            <p><strong>Drodzy Użytkownicy,</strong></p>
-            <p>Po dłuższej przerwie w końcu prace serwisowe się zakończyły.</p>
-            <p>Aktualnie wziąłem się za stronę internetową, która też dostanie lekki update.</p>
-            <p>Na całe szczęście tu już dużo czasu mi nie zjdzie, a usługi wrócą do pełnego działania</p>
-            <p>Przewidywany czas prac: <strong>Dzisiaj do wieczora</strong></p>
-        </div>
-
-        <div class="footer">
-            <p>Przepraszam za utrudnienia i dziękuję za cierpliwość!</p>
-            <p style="margin-top: 10px; font-size: 0.8em;">© 2025 - Wszystkie usługi zostaną przywrócone niezwłocznie po zakończeniu prac</p>
-        </div>
+        <footer>
+            <p>&copy; 2025 Vaxyn Website | Wszystkie prawa zastrzeżone</p>
+        </footer>
     </div>
 </body>
 </html>
